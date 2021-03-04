@@ -25,7 +25,7 @@
         )
     )
     (if (> rotate 0)
-        (r-l
+        (rotate-left
             (- rotate 1)
             (append
                 (cdr list)
