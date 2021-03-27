@@ -4,8 +4,23 @@
 
 using namespace std;
 
-void error(string text, int& index, string output);
-
+/* Edado de error:
+	+entradas:
+		-texto: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el error
+		-output: La concatenacion de todo el texto anterior que ahora se marca como error
+	+Se concatenan todos los caracteres siguientes hasta que se encuentre un operador o parentecis
+*/
+void error(string text, int& index, string output){
+	bool substract = 0;
+	substract = (output == "");
+	while( isalpha(text[index]) || isdigit(text[index]) || text[index] == '_' || text[index] == '.' ){
+		output += text[index];
+		index++;
+	}
+	cout << output << '\t' << "Error" <<'\n';
+	index -= substract;
+}
 /* Estado de variable:
 	+entradas:
 		-texto: La linea de codigo que se esta evaluando
@@ -100,7 +115,19 @@ void isNum(string text, int& index, string output){
 	index--;
 }
 
-void isComment(string text, int& index);
+/* Estado de Comentario:
+	+entradas:
+		-texto: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el error
+	+Determina si es comentario o no
+	+Termina de leer la linea actual
+*/
+void isComment(string text, int& index){
+	if( text[index+1] == '/' ){
+		cout << text.substr( index, text.length()-index ) << '\t' << "Comentario" << '\n';
+		index = text.length();
+	}else cout << "/" << '\t' << "División" << '\n';
+}
 
 /* Estado inicial:
 	+entradas:
