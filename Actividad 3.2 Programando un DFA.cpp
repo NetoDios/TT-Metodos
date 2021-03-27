@@ -1,17 +1,104 @@
 #include <iostream>
 #include <ctype.h>
 #include <fstream>
+
 using namespace std;
 
 void error(string text, int& index, string output);
 
-void isVar(string text, int& index);
+/* Estado de variable:
+	+entradas:
+		-texto: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el error
+	+Se concatenan todos los caracteres hasta que encuentre alguno que no sea permitido para Variable
+	+Determina si hay o no un error
+*/
+void isVar(string text, int& index){
+	string output = "";
+	while( isalpha(text[index]) || isdigit(text[index]) || text[index] == '_'  || 
+			int(text[index]) == 164 || int(text[index]) == 165 ){
+		output += text[index];
+		index++;
+	}
+	if( text[index] == '.' )
+		error(text, index, output);
+	else
+		cout << output << '\t' << "Variable" << '\n';
+	index--;
+}
 
-void isExp(string text, int& index, string output);
+/* Estado de Exponente:
+	+entradas:
+		-texto: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el error
+		-output: La concatenacion de todo el texto anterior que sera impresa en consola
+	+Cuando un numero real presenta un letra e en su definicion se ejecuta
+	+Concatena todos los digitos del numero real hasta que encuentre un no digitos
+	+Determina si es una entrada valida o no
+*/
+void isExp(string text, int& index, string output){
+	output += text[index];
+	index++;
+	if( text[index] == '-' ){
+		output += text[index];
+		index++;
+	}
+	while( isdigit(text[index]) ){
+		output += text[index];
+		index++;
+	}
+	
+	if( text[index] == '.' || text[index] == '_' || isalpha(text[index]))
+		error(text, index, output);
+	else
+		cout << output << '\t' << "Real" << '\n';
+}
 
-void isReal(string text, int& index, string output);
+/* Estado de Real:
+	+entradas:
+		-texto: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el error
+		-output: La concatenacion de todo el texto anterior que sera impresa en consola
+	+Se ejecuta cuando un entero contiene un punto
+	+Concatena los digitos de un numero real hasta encontrar un no digitos
+	+Determina si hay o no errores
+*/
+void isReal(string text, int& index, string output){
+	output += text[index];
+	index++;
+	while( isdigit(text[index]) ){
+		output += text[index];
+		index++;
+	}
+	if( text[index] == 'E' || text[index] == 'e' )
+		isExp(text, index, output);
+	else if( text[index] == '.' )
+		error(text, index, output);
+	else
+		cout << output << '\t' << "Real" << '\n';
+}
 
-void isNum(string text, int& index, string output);
+/* Estado de Numero:
+	+entradas:
+		-texto: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el error
+		-output: La concatenacion de todo el texto anterior que sera impresa en consola
+	+Concatena los digitos de un numero hasta encontrar un no digito
+	+Determina si hay o no errores
+*/
+void isNum(string text, int& index, string output){
+	while( isdigit(text[index]) ){
+		output += text[index];
+		index++;
+	}
+	if( text[index] == '.')
+		isReal(text, index, output);
+	else if( isalpha(text[index]) )
+		error(text, index, output);
+	else
+		cout << output << '\t' << "Entero" << '\n';
+	index--;
+}
 
 void isComment(string text, int& index);
 
