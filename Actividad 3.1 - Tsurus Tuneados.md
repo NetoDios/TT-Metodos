@@ -1,13 +1,14 @@
 
 # 4. Let X = {aa, bb} and Y = {λ, b, ab}.
-## a) List the strings in the set XY.
-
-## b) How many strings of length 6 are there in X*?
-
-## c) List the strings in the set Y* of length three or less
-
-## d) List the strings in the set X*Y* of length four or less.
-
+### a) List the strings in the set XY.
+    {aa,aab,aaab,bb,bbb,bbab}
+### b) How many strings of length 6 are there in X*?
+    {aaaaaa,aaaabb,aabbaa,aabbbb,bbaaaa,bbbbaa,bbaabb,bbbbbb}
+    8
+### c) List the strings in the set Y* of length three or less
+    {λ,b,ab,bab,abb,bb,bbb}
+### d) List the strings in the set X*Y* of length four or less.
+    {λ,aa,bb,aaaa,aabb,bbaa,bbbb,b,ab,bab,abb,bb,bbb,aab,aaab,bbb,bbab}
 
 
 
@@ -19,7 +20,7 @@
 # 16. The set of strings over {a, b, c} with length three.
 
 # 17. The set of strings over {a, b, c} with length less than three.
-
+    {W|W=(a,b,c,aa,ab,ba,bc,ac,ca,cb,bb,cc,λ)}
 # 18. The set of strings over {a, b,c} with length greater than three.
 
 # 19. The set of strings over {a, b} that contain the substring ab and have length greater than two.
