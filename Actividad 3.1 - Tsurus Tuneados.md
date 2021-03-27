@@ -1,14 +1,14 @@
 
-# 4. Let X = {aa, bb} and Y = {λ, b, ab}.
+# 4. Let X = {aa, bb} and Y = {ε, b, ab}.
 ### a) List the strings in the set XY.
     {aa,aab,aaab,bb,bbb,bbab}
 ### b) How many strings of length 6 are there in X*?
     {aaaaaa,aaaabb,aabbaa,aabbbb,bbaaaa,bbbbaa,bbaabb,bbbbbb}
     8
 ### c) List the strings in the set Y* of length three or less
-    {λ,b,ab,bab,abb,bb,bbb}
+    {ε,b,ab,bab,abb,bb,bbb}
 ### d) List the strings in the set X*Y* of length four or less.
-    {λ,aa,bb,aaaa,aabb,bbaa,bbbb,b,ab,bab,abb,bb,bbb,aab,aaab,bbb,bbab}
+    {ε,aa,bb,aaaa,aabb,bbaa,bbbb,b,ab,bab,abb,bb,bbb,aab,aaab,bbb,bbab}
 
 
 
