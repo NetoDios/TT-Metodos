@@ -6,7 +6,7 @@
     8
 ### c) List the strings in the set Y* of length three or less
     {ε,b,ab,bab,abb,bb,bbb}
-### d) List the strings in the set X*Y* of length four or less.
+### d) List the strings in the set X* Y* of length four or less.
     {ε,aa,bb,aaaa,aabb,bbaa,bbbb,b,ab,bab,abb,bb,bbb,aab,aaab,bbb,bbab}
 
 # 14. The set of strings over {a, b, c} in which all the a ’s precede the b's, which in turn precede the c’s. It is possible that there are no a ’s, b’s, or c’s.
