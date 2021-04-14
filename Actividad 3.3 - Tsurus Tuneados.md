@@ -1,6 +1,18 @@
 # 4.1 Give context.free grammars generating the following sets.
-### a) The set of pañindromes (strings that read the same forward as backward) over alphabet {a, b}.
-    Respuesta
+### a) The set of palindromes (strings that read the same forward as backward) over alphabet {a, b}.
+    V : E
+    Σ : (a,b)
+    P : (E)
+    S : E
+
+    P contiene las siguientes producciones
+    E -> aEa
+    E -> a
+    E -> aa
+    E -> bEb
+    E -> b
+    E -> bb
+
 ### b) The set of all strings of balanced parentheses, i.e., each left parenthesis has a matching right parenthesis and pairs of matching parenthesis are properly nested.
     Respuesta
 ### c) The set of strings over alphabet {$a, b$} with exactly twice as many $a$´s as $b$'s
@@ -26,7 +38,10 @@ For the string $aaabbabbba$ find a
 ### b) rightmost derivation
     Respuesta
 ### c) parse tree
-    Respuesta
+    [S [a] [B [a] [B [a] [B [b] [S [b] [A [a]]]] [B [b]]] [B [b] [S [b] [A [a]]]]]]
+<p align=center>
+<img src=https://media.discordapp.net/attachments/692982204627812372/831982367644188682/syntax_tree.png title="Parse Tree">
+</p>
  
 # 4.9 Is the grammar in exercise 4.8 unambiguous?
     Respuesta
