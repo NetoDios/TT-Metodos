@@ -14,7 +14,16 @@
     E -> bb
 
 ### c) The set of strings over alphabet {$a, b$} with exactly twice as many $a$'s as $b$'s
-    Respuesta
+    V : E
+    Σ : (a,b)
+    P : (E)
+    S : E
+
+    P contiene las siguientes producciones
+    E -> aab | baa | aba
+    E -> aEab | aaEb | bEaa | baEa | aEba | abEa
+    E -> aEaEb | aEbEa | bEaEa
+    E -> EE
 
 # 4.8 Let $G$ be the grammar
 $$
