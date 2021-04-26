@@ -10,9 +10,83 @@ using namespace std;
 
 ofstream  output;
 
-void error(string text, int& index, string salida);
-void isVar(string text, int& index);
-void isExp(string text, int& index, string salida);
+/* Estado de error:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el error
+		-salida: La concatenacion de todo el texto anterior que ahora se marca como error y se escribira en el archivo de salida
+	+Se concatenan todos los caracteres siguientes hasta que se encuentre un operador o parentesis
+	+complegidad:
+		- O( n )
+		- n siendo el numero de caracteres que componen el token
+*/
+void error(string text, int& index, string salida){
+	bool substract = 0;
+	substract = (salida == "");
+	while( isalpha(text[index]) || isdigit(text[index]) || text[index] == '_' || text[index] == '.' ){
+		salida += text[index];
+		index++;
+	}
+	output << "<span class='error'>" << salida << "</span>";
+	index -= substract;
+}
+
+/* Estado de variable:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el caracter que se esta evaluando
+	+Se concatenan todos los caracteres hasta que encuentre alguno que no sea permitido para Variable
+	+Determina si hay o no un error
+	+complegidad:
+		- O( n )
+		- n siendo el numero de caracteres que componen el token
+*/
+void isVar(string text, int& index){
+	string salida = "";
+	while( isalpha(text[index]) || isdigit(text[index]) || text[index] == '_'  || text[index] == '-'  || 
+			int(text[index]) == 164 || int(text[index]) == 165 ){
+		salida += text[index];
+		index++;
+	}
+	if(salida=="define" || salida=="l")
+		output <<"<span class='reservado'>" << salida << "</span>";
+	else if( text[index] == '.' )
+		error(text, index, salida);
+	else
+		output << "<span class='variables'>" << salida << "</span>";
+	index--;
+}
+
+/* Estado de Exponente:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el numero exponencial
+		-salida: La concatenacion de todo el texto anterior que sera impresa en el archivo de salida
+	+Cuando un numero real presenta un letra e en su definicion se ejecuta
+	+Concatena todos los digitos del numero real hasta que encuentre un no digitos
+	+Determina si es una entrada valida o no
+	+complegidad:
+		- O( n )
+		- n siendo el numero de caracteres que componen el token
+*/
+void isExp(string text, int& index, string salida){
+	salida += text[index];
+	index++;
+	if( text[index] == '-' ){
+		salida += text[index];
+		index++;
+	}
+	while( isdigit(text[index]) ){
+		salida += text[index];
+		index++;
+	}
+	
+	if( text[index] == '.' || text[index] == '_' || isalpha(text[index]))
+		error(text, index, salida);
+	else
+		output << "<span class='numero'>" << salida << "</span>";
+}
+
 void isReal(string text, int& index, string salida);
 void isBool(string text, int& index, string salida);
 void isNum(string text, int& index, string salida);
