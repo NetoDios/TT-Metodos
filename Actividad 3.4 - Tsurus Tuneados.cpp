@@ -92,6 +92,81 @@ void isNum(string text, int& index, string salida){
 	index--;
 }
 
+/* Estado de Real:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el numero real
+		-salida: La concatenacion de todo el texto anterior que sera impresa en en el archivo de salida
+	+Se ejecuta cuando un entero contiene un punto
+	+Concatena los digitos de un numero real hasta encontrar un no digitos
+	+Determina si hay o no errores
+	+complegidad:
+		- O( n )
+		- n siendo el numero de caracteres que componen el token
+*/
+void isReal(string text, int& index, string salida){
+	salida += text[index];
+	index++;
+	while( isdigit(text[index]) ){
+		salida += text[index];
+		index++;
+	}
+	if( text[index] == 'E' || text[index] == 'e' )
+		isExp(text, index, salida);
+	else if( text[index] == '.' )
+		error(text, index, salida);
+	else
+		output << "<span class='numero'>" << salida << "</span>";
+}
+
+
+/* Estado Logico:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el #
+		-salida: La concatenacion de todo el texto anterior que sera impresa en el archivo de salida
+	+Se ejecuta #
+	+Checa si el siguiente es f o t
+	+complegidad:
+		- O( 1 )
+		- n siendo el numero de caracteres que componen el token
+*/
+void isBool(string text, int& index, string salida){
+	salida = text[index];
+	index++;
+	if(( text[index] == 'f' || text[index] == 't'  ) && (text[index+1]==' ' || text[index+1]==')'||text[index+1]=='(')){
+		salida+=text[index];
+		output << "<span class='logico'>" << salida << "</span>";
+	}
+	else
+		error(text, index, salida);
+}
+
+/* Estado de Numero:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el caracter que se esta evaluando
+		-salida: La concatenacion de todo el texto anterior que sera impresa en el archivo de salida
+	+Concatena los digitos de un numero hasta encontrar un no digito
+	+Determina si hay o no errores
+	+complegidad:
+		- O( n )
+		- n siendo el numero de caracteres que componen el token
+*/
+void isNum(string text, int& index, string salida){
+	while( isdigit(text[index]) ){
+		salida += text[index];
+		index++;
+	}
+	if( text[index] == '.')
+		isReal(text, index, salida);
+	else if( isalpha(text[index]) )
+		error(text, index, salida);
+	else
+		output << "<span class='numero'>" << salida << "</span>";
+	index--;
+}
+
 /* Estado de Simbolos:
 	+entradas:
 		-text: La linea de codigo que se esta evaluando
