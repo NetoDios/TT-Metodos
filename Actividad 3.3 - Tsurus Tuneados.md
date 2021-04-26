@@ -13,7 +13,7 @@
     E -> b
     E -> bb
 
-### c) The set of strings over alphabet {$a, b$} with exactly twice as many $a$'s as $b$'s
+### c) The set of strings over alphabet {a, b} with exactly twice as many a's as b's
     V : E
     Σ : (a,b)
     P : (E)
@@ -25,13 +25,13 @@
     E -> aEaEb | aEbEa | bEaEa
     E -> EE
 
-# 4.8 Let $G$ be the grammar
-$$
-S → aB\ |\ bA \\
-A → a\ |\ aS\ |\ bAA \\
-B → b\ |\ bS\ |\ aBB
-$$
-## For the string $aaabbabbba$ find:
+# 4.8 Let G be the grammar
+<p align=center> S → aB | bA </p>
+<p align=center> A → a | aS | bAA </p>
+<p align=center> B → b | bS | aBB </p>
+
+
+## For the string aaabbabbba find:
 ### a) leftmost derivation
     [S] → a[B] → aa[B]B → aaa[B]BB → aaab[S]BB → aaabb[A]BB → aaabba[B]B
     aaabba[B]B → aaabbab[B] → aaabbabb[S] → aaabbabbb[A] → aaabbabbba
