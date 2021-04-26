@@ -2,9 +2,10 @@
 #include <ctype.h>
 #include <fstream>
 #include <chrono>
+#include <sstream>
 
 using namespace std;
-#define CSS ".numero{\n\tcolor: skyblue;\n}\n.logico{\n\tcolor: darkgoldenrod;\n}\n.simbolo{\n\tcolor: forestgreen;\n}\n.operador{\n\tcolor: red;\n}\n.variables{\n\tcolor: gray;\n}\n.especiales{\n\tcolor: coral;\n}\n.comentarios{\n\tcolor: plum;\n}\n.reservado{\n\tcolor: saddlebrown;\n}\n.error{\n\tcolor: purple;\n}\n*{\n\tbackground: black;\n}\n";
+#define CSS ".numero{\n\tcolor: skyblue;\n}\n.logico{\n\tcolor: darkgoldenrod;\n}\n.simbolo{\n\tcolor: forestgreen;\n}\n.operador{\n\tcolor: red;\n}\n.variables{\n\tcolor: gray;\n}\n.especiales{\n\tcolor: coral;\n}\n.comentarios{\n\tcolor: plum;\n}\n.reservado{\n\tcolor: saddlebrown;\n}\n.error{\n\tcolor: purple;\n}\n*{\n\tbackground: #121212;\n}\n";
 #define INICIO "<!DOCTYPE html>\n<html lang=\"en\">\n\t<head>\n\t\t<link rel=\"stylesheet\" href=\"style.css\">\n\t</head>\n\t<body>\n";
 #define FIN "\t</body>\n</html>";
 
@@ -30,7 +31,6 @@ void error(string text, int& index, string salida){
 	output << "<span class='error'>" << salida << "</span>";
 	index -= substract;
 }
-
 /* Estado de variable:
 	+entradas:
 		-text: La linea de codigo que se esta evaluando
@@ -87,11 +87,99 @@ void isExp(string text, int& index, string salida){
 		output << "<span class='numero'>" << salida << "</span>";
 }
 
-void isReal(string text, int& index, string salida);
-void isBool(string text, int& index, string salida);
-void isNum(string text, int& index, string salida);
-void isString(string text, int& index, string salida);
+/* Estado de Real:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el numero real
+		-salida: La concatenacion de todo el texto anterior que sera impresa en en el archivo de salida
+	+Se ejecuta cuando un entero contiene un punto
+	+Concatena los digitos de un numero real hasta encontrar un no digitos
+	+Determina si hay o no errores
+	+complegidad:
+		- O( n )
+		- n siendo el numero de caracteres que componen el token
+*/
+void isReal(string text, int& index, string salida){
+	salida += text[index];
+	index++;
+	while( isdigit(text[index]) ){
+		salida += text[index];
+		index++;
+	}
+	if( text[index] == 'E' || text[index] == 'e' )
+		isExp(text, index, salida);
+	else if( text[index] == '.' )
+		error(text, index, salida);
+	else
+		output << "<span class='numero'>" << salida << "</span>";
+}
 
+
+/* Estado Logico:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el #
+		-salida: La concatenacion de todo el texto anterior que sera impresa en el archivo de salida
+	+Se ejecuta #
+	+Checa si el siguiente es f o t
+	+complegidad:
+		- O( 1 )
+		- n siendo el numero de caracteres que componen el token
+*/
+void isBool(string text, int& index, string salida){
+	salida = text[index];
+	index++;
+	if(( text[index] == 'f' || text[index] == 't'  ) && (text[index+1]==' ' || text[index+1]==')'||text[index+1]=='(')){
+		salida+=text[index];
+		output << "<span class='logico'>" << salida << "</span>";
+	}
+	else
+		error(text, index, salida);
+}
+
+/* Estado de Numero:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el caracter que se esta evaluando
+		-salida: La concatenacion de todo el texto anterior que sera impresa en el archivo de salida
+	+Concatena los digitos de un numero hasta encontrar un no digito
+	+Determina si hay o no errores
+	+complegidad:
+		- O( n )
+		- n siendo el numero de caracteres que componen el token
+*/
+void isNum(string text, int& index, string salida){
+	while( isdigit(text[index]) ){
+		salida += text[index];
+		index++;
+	}
+	if( text[index] == '.')
+		isReal(text, index, salida);
+	else if( isalpha(text[index]) )
+		error(text, index, salida);
+	else
+		output << "<span class='numero'>" << salida << "</span>";
+	index--;
+}
+
+/* Estado de Simbolos:
+	+entradas:
+		-text: La linea de codigo que se esta evaluando
+		-index(referencia): La posicion desde la cual se encuentra el caracter que se esta evaluando
+		-salida: La concatenacion de todo el texto anterior que sera escrito en el archivo de salida
+	+Concatena los caracteres hasta encontrar un espacio vacio y lo escribe en el archivo de salida
+	+complegidad:
+		- O( n )
+		- n siendo el numero de caracteres que componen el token
+*/
+void isString(string text, int& index, string salida){
+	while( text[index] != ' ' &&  text[index] != ')' && text[index] != '(' && text[index] != '\n' ){
+		salida += text[index];
+		++index;
+	}
+	output << "<span class='simbolo'>" << salida << "</span>";
+	--index;
+}
 /* Estado inicial:
 	+entradas:
 		-archivo: El nombre del archivo con la extension a analizar
@@ -108,9 +196,9 @@ void lexerAritmetico(string archivo){
 	fstream file = fstream(archivo);
 	if( file.is_open() ){
 		ofstream css;
-		css.open("Output/style.css");
+		css.open("style.css");
 		css << CSS;
-		output.open("Output/code.html");
+		output.open("code.html");
 		output << INICIO;
 		while(! file.eof()){
 			getline(file, line);
@@ -150,9 +238,9 @@ void lexerAritmetico(string archivo){
 	+Calcula e imprime el tiempo de ejecucion desde que se termina de introducir el nombre del archivo hasta que termina toda la ejecucion.
 */
 int main() {
-  	string nombreArchivo = "prueba.txt";
+  string nombreArchivo;
 	cout<<"Introduce el nombre del archivo a analizar, incluyendo su extension"<<endl;
-	//cin>>nombreArchivo;
+	cin>>nombreArchivo;
 	auto t1 = chrono::high_resolution_clock::now();
 	lexerAritmetico(nombreArchivo);
 	auto t2 = chrono::high_resolution_clock::now();
