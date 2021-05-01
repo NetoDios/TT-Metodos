@@ -21,3 +21,6 @@
 <p align=center>
 <img src=https://media.discordapp.net/attachments/717747027081166948/837889850844643348/Diagrama_4.1_Turing.png title="diagram">
 </p>
+
+#### La teoría de decibilidad:
+    habla sobre la propiedad de los sistemas para determinar si una fórmula forma parte de un conjunto de verdades de un sistema.
