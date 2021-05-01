@@ -5,22 +5,22 @@
 
 #### Ejemplos válidos de la máquina de Turing:
 
-
-
-
-| 0  | 1  | 0  | @  |
+| 0 | 1 | 0 | @ |
 |---|---|---|---|
 
-| 0  |  0 | 0  | 1 | 1| 1| 0|0|0|@|
-|---|---|---|---|---|---|---|---|-|-|
+| 0 | 0 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | @ |
+|---|---|---|---|---|---|---|---|---|---|
 
     Aquí se usa el símbolo “@” para indicar el final de la cinta.
 
     En este diagrama los 0’ s se vuelven “X”, los 1’ s se vuelven “Y”, y el símbolo final es “@”.
 
 <p align=center>
-<img src=https://media.discordapp.net/attachments/717747027081166948/837889850844643348/Diagrama_4.1_Turing.png title="diagram">
+<img src=https://media.discordapp.net/attachments/784839132362178572/837896895572738098/Diagrama_4.1_Turing.png title="diagram">
 </p>
 
 #### La teoría de decibilidad:
-    habla sobre la propiedad de los sistemas para determinar si una fórmula forma parte de un conjunto de verdades de un sistema.
+    Habla sobre la propiedad de los sistemas para determinar si una fórmula forma parte de un conjunto de verdades de un sistema.
+
+#### La teoría de computabilidad:
+    Esta estudia los problemas de decisión que se pueden resolver con una máquina de Turing.
