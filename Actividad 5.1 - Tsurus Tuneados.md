@@ -22,11 +22,34 @@ Respuesta.
 ```
 ##### 6. Write a predicate max/3which takes three arguments, the first two are positive integer numbers and returns in the third the max of them.
 ```prolog
-Respuesta.
+max(N,N2,R):-
+    N>0,
+    N2>0,
+    N<N2,
+    R is N2.
+    
+max(N,N2,R):-
+    N>0,
+    N2>0,
+    N>N2,
+    R is N.
 ```
-##### 7. Write a predicate fact/2which takes a natural number as first argument, and returns the factorial of the number.##### 8. Write a predicate fib/2which takes a natural number as first argument, and returns the value of the Fibonacci sequence for that position (counting from 1).
+##### 7. Write a predicate fact/2which takes a natural number as first argument, and returns the factorial of the number.
 ```prolog
 Respuesta.
+```
+##### 8. Write a predicate fib/2which takes a natural number as first argument, and returns the value of the Fibonacci sequence for that position (counting from 1).
+```prolog
+fib(0,1).
+fib(1,1).
+fib(N,R):-
+    N > 1,
+    N1 is N-1,
+    N2 is N-2,
+    fib(N1, R1),
+    fib(N2, R2),
+    R is R1+R2.
+
 ```
 ##### 9. Write a predicate length2/2which takes a list as first argument, and returns in the second one the number of elements in the list.
 ```prolog
