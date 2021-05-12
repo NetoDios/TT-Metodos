@@ -24,7 +24,17 @@ Respuesta.
 ```prolog
 Respuesta.
 ```
-##### 7. Write a predicate fact/2which takes a natural number as first argument, and returns the factorial of the number.##### 8. Write a predicate fib/2which takes a natural number as first argument, and returns the value of the Fibonacci sequence for that position (counting from 1).
+##### 7. Write a predicate fact/2which takes a natural number as first argument, and returns the factorial of the number.
+```prolog
+fact(0,1).
+
+fact(N,R) :-  
+  N>0, 
+  N1 is N-1,
+  fact(N1,R1), 
+  R is N * R1.
+```
+##### 8. Write a predicate fib/2which takes a natural number as first argument, and returns the value of the Fibonacci sequence for that position (counting from 1).
 ```prolog
 Respuesta.
 ```
@@ -34,7 +44,18 @@ Respuesta.
 ```
 ##### 10. Write a predicate power/3which takes a number as first argument, natural number as second argument and returns the first number to the power of the second.
 ```prolog
-Respuesta.
+power(0,0,fail).
+power(X,0,R) :-
+  X>0,
+  R is 1.
+
+power(X,1,X).
+
+power(X,N,R) :-
+  N>0,
+  N1 is N-1,
+  power(X,N1,R1),
+  R is R1*X.
 ```
 ##### 11. Write a predicate count_vowels/2 which takes a list as its first argument and returns an integer number(as its second argument) which consists of the count of elements of the input list which area vowel (we assume that the input list only contains vowels and consonants).
 ```prolog
