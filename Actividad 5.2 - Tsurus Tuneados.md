@@ -11,3 +11,16 @@ public boolean isPrime(int number){
     return true;
 }
 ```
+
+Este metodo lo podemos usar de dos maneras diferentes, pues esta la manera tradicional de estructurar el código de manera secuencial, o podemos hacer uso total de los recursos del procesador, dividiendo la tarea entre multiples hilos. Para hacer esto se usa el siguiente código:
+
+```java
+@Override
+public void run(){
+    long sum = 0;
+    for (int i = 2 + this.ID; i < 5000000; i+=Main.HILOS)
+        if( isPrime(i) )
+            sum += i;
+    Main.resultado += sum;
+}
+```
