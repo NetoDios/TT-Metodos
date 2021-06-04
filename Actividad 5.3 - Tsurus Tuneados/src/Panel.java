@@ -9,12 +9,11 @@ public class Panel extends JFrame{
     private JLabel labelPic;
     private static FileQueue archivos;
     public static long inicio;
-
+    public static int nHilos=2;
     public Panel() {
         add(rootPanel);
         setTitle("Actividad 5.3 - Tsurus Tuneados");
         setSize(450,600);
-        int nHilos = 1;
         Hilos[] hilos = new Hilos[nHilos];
         archivos = new FileQueue();
         ImageIcon tsuruTuneado = new ImageIcon("Tank.png");
@@ -24,7 +23,7 @@ public class Panel extends JFrame{
         Browse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Browse.setEnabled(false);
+                //Browse.setEnabled(false);
                 JFileChooser chooser = new JFileChooser();
                 chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int response = chooser.showOpenDialog(rootPanel);
@@ -34,7 +33,7 @@ public class Panel extends JFrame{
                         fillQueue(path);
                         inicio = System.currentTimeMillis();
                         for (int i=0 ; i<nHilos ; i++) {
-                            hilos[i] = new Hilos(i+1, archivos);
+                            hilos[i] = new Hilos(i+1,path , archivos);
                             hilos[i].start();
                         }
                     } catch (NumberFormatException ex) {
