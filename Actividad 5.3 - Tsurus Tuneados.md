@@ -54,6 +54,25 @@ En esta ocasión se consiguieron los siguientes datos al analizar 1000 archivos 
 |        10       |         7.9          |
 |        12       |         8.1          |
 
+Como se ve en la tabla, el uso de hilos en paralelo eficientiza en gran medida el tiempo de ejecución pues el paradigma permite que más de un proceso se ejecute al mismo momento. Esto es posible gracias a que los procesos son independientes entre sí.
+
+En nuestro código estamos destinando un archivo a cada hilo del procesador, una vez termina de hacer el proceso se le asigna un nuevo archivo. Esto de primera instancia es una solución muy completa, pero mientras probamos el código nos dimos cuenta que varios hilos podían analizar un mismo archivo, entonces tuvimos que buscar una manera diferente de destinar los archivos a los hilos; se optó por hacer una cola compartida que se accediera de manera sincronizada
+
+```java
+synchronized public void addFile(String fileName){
+    convert.add(fileName);
+    System.out.println(fileName+" ( "+convert.size()+" )");
+}
+synchronized public String getFile(){
+    if(!convert.isEmpty()){
+        String aux = convert.peek();
+        convert.remove();
+        return aux;
+    }
+    finished();
+    return null;
+}
+```
 
 
 <div class="page"></div>
