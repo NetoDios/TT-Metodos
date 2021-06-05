@@ -107,7 +107,7 @@ while(file != null){
 }
 ```
 
-En la siguiente liga se encuentra el código fuente del proyecto: (https://github.com/NetoDios/TT-Metodos/tree/master/Actividad%205.3%20-%20Tsurus%20Tuneados)[https://github.com/NetoDios/TT-Metodos/tree/master/Actividad%205.3%20-%20Tsurus%20Tuneados]
+En la siguiente liga se encuentra el código fuente del proyecto: [https://github.com/NetoDios/TT-Metodos/tree/master/Actividad%205.3%20-%20Tsurus%20Tuneados](https://github.com/NetoDios/TT-Metodos/tree/master/Actividad%205.3%20-%20Tsurus%20Tuneados)
 
 
 
