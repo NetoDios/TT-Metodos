@@ -39,13 +39,21 @@
 
 
 
-# Texto
+Debido a la gran demanda de soluciones que requieren de crear nuevas tecnologías, como lenguajes de programación, un resaltado sintáctico se vuelve una gran herramienta para las personas los programadores, pues así se agiliza la búsqueda de errores e incluso sentencias dentro de los archivos, eficientando el tiempo en el que tanto se escribe como en el que se prueba el código.
 
-> Aqui vamos a poner nuestro reporte
+Al trabajar con una cantidad grande de archivos la solución llega a volverse lenta si intentamos hacer un archivo tras de otro, cosa que se convierte en un inconveniente cuando se trata de algo se hace con la esperanza de ahorrar tiempo (y motivos estéticos), para ello es necesario hacer las más optimizaciones que sean posibles.
+En esta ocasión se consiguieron los siguientes datos al analizar 1000 archivos con 1000 líneas de código todos, con distintos números de hilos:
 
-```java
-    //Y aca un pedazo de codigo
-```
+| Numero de Hilos | Tiempo (en segundos) |
+|-----------------|----------------------|
+|         1       |          18          |
+|         2       |        13.5          |
+|         3       |         8.3          |
+|         5       |           8          |
+|         8       |         8.2          |
+|        10       |         7.9          |
+|        12       |         8.1          |
+
 
 
 <div class="page"></div>
