@@ -9,7 +9,7 @@ public class Panel extends JFrame{
     private JLabel labelPic;
     private static FileQueue archivos;
     public static long inicio;
-    public static int nHilos=2;
+    public static int nHilos=36;
     public Panel() {
         add(rootPanel);
         setTitle("Actividad 5.3 - Tsurus Tuneados");

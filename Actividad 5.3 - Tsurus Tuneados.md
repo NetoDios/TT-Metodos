@@ -74,5 +74,37 @@ synchronized public String getFile(){
 }
 ```
 
+Computacionalmente hablando nuestro código no tiene gran complejidad, esto es algo bueno que logramos al asegurar que cada archivo se analiza exactamente una vez, en concreto y por secciones del programa cuando leemos los archivos del directorio es en tiempo lineal `O(n)`
+```java
+private static void fillQueue(String path) {
+    File dir = new File(path);
+    File[] dirFiles = dir.listFiles();
+    if(dirFiles != null){
+        for(File file : dirFiles) {
+            String name = file.getName();
+            archivos.addFile(name);
+        }
+    }
+}
+```
+
+De ahí en más, lo más destacable es la manera en la que se ejecuta el resaltado sintáctico, con este método `exec()`, esto se ejecuta para cada hilo y tiene una complejidad lineal `O(n)`
+```java
+while(file != null){
+    file = this.archivos.getFile();
+    String[] params = {execute, path, file};
+    if(file!=null){
+        try {
+            long inicio = System.currentTimeMillis();
+            app.exec(params);
+            long fin = System.currentTimeMillis();
+            System.out.print("Procesando (H" + this.id + "): " + file);
+            System.out.println(" ->\t"+(fin-inicio)+" ms");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
 <div class="page"></div>
