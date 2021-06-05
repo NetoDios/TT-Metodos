@@ -106,6 +106,13 @@ while(file != null){
     }
 }
 ```
+Para nosotro la eficiencia de estos algoritmos se demuestra al ver que los tiempos de ejecución se ven reducidos al aumentar el número de hilos, que después de un punto se ve poca mejora (debido a que se comunican con un método síncrono), pero de no haber hecho una implementación correcta hubiéramos gastado más recursos de lo que se requiere realmente.
+
+Que justo esto nos abre la puerta para hablar de una mala implementación intencionalmente, pues es posible sobrecargar de procesos a un equipo y limitar los recursos destinados para otras tareas.
+
+Por último hablar de algunos casos más grandes, donde realmente sea necesario hacer uso de paralelismo, si se tratase de archivos muy grandes o quizá un video juego que debe calcular múltiples físicas simultáneamente.
+ 
+En la siguiente liga se encuentra un video explicativo de la solución [https://youtu.be/yfchJLkZT_w](https://youtu.be/yfchJLkZT_w)
 
 En la siguiente liga se encuentra el código fuente del proyecto: [https://github.com/NetoDios/TT-Metodos/tree/master/Actividad%205.3%20-%20Tsurus%20Tuneados](https://github.com/NetoDios/TT-Metodos/tree/master/Actividad%205.3%20-%20Tsurus%20Tuneados)
 
